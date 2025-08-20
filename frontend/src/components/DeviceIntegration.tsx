@@ -61,7 +61,7 @@ import {
   Battery90 as BatteryIcon,
   SignalWifi4Bar as SignalIcon,
   Timeline as TrendIcon,
-  Calibrate as CalibrateIcon,
+  Tune as CalibrateIcon,
   PlayArrow as StartIcon,
   Stop as StopIcon,
   Info as InfoIcon

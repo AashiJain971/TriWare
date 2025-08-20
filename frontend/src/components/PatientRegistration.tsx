@@ -742,8 +742,8 @@ const MedicalHistoryStep: React.FC<any> = ({ data, onArrayAdd, onArrayRemove, on
       <ArrayInputField
         label={t.allergies}
         values={data.allergies}
-        onAdd={(value) => onArrayAdd('allergies', value)}
-        onRemove={(value) => onArrayRemove('allergies', value)}
+        onAdd={(value: string) => onArrayAdd('allergies', value)}
+        onRemove={(value: string) => onArrayRemove('allergies', value)}
         placeholder="Enter allergy and press Enter"
       />
     </Grid>
@@ -752,8 +752,8 @@ const MedicalHistoryStep: React.FC<any> = ({ data, onArrayAdd, onArrayRemove, on
       <ArrayInputField
         label={t.medications}
         values={data.currentMedications}
-        onAdd={(value) => onArrayAdd('currentMedications', value)}
-        onRemove={(value) => onArrayRemove('currentMedications', value)}
+        onAdd={(value: string) => onArrayAdd('currentMedications', value)}
+        onRemove={(value: string) => onArrayRemove('currentMedications', value)}
         placeholder="Enter medication and press Enter"
       />
     </Grid>
@@ -762,8 +762,8 @@ const MedicalHistoryStep: React.FC<any> = ({ data, onArrayAdd, onArrayRemove, on
       <ArrayInputField
         label={t.conditions}
         values={data.medicalConditions}
-        onAdd={(value) => onArrayAdd('medicalConditions', value)}
-        onRemove={(value) => onArrayRemove('medicalConditions', value)}
+        onAdd={(value: string) => onArrayAdd('medicalConditions', value)}
+        onRemove={(value: string) => onArrayRemove('medicalConditions', value)}
         placeholder="Enter medical condition and press Enter"
       />
     </Grid>
@@ -881,7 +881,7 @@ const AccessibilityControls: React.FC<any> = ({ settings, onChange, t }) => {
               <ListItemText primary={t.voiceGuidance} />
               <Switch
                 checked={settings.voiceGuidance}
-                onChange={(e) => onChange(prev => ({ ...prev, voiceGuidance: e.target.checked }))}
+                onChange={(e) => onChange((prev: AccessibilitySettings) => ({ ...prev, voiceGuidance: e.target.checked }))}
               />
             </ListItem>
             
@@ -889,7 +889,7 @@ const AccessibilityControls: React.FC<any> = ({ settings, onChange, t }) => {
               <ListItemText primary="Large Text" />
               <Switch
                 checked={settings.largeText}
-                onChange={(e) => onChange(prev => ({ ...prev, largeText: e.target.checked }))}
+                onChange={(e) => onChange((prev: AccessibilitySettings) => ({ ...prev, largeText: e.target.checked }))}
               />
             </ListItem>
             
@@ -897,7 +897,7 @@ const AccessibilityControls: React.FC<any> = ({ settings, onChange, t }) => {
               <ListItemText primary="High Contrast" />
               <Switch
                 checked={settings.highContrast}
-                onChange={(e) => onChange(prev => ({ ...prev, highContrast: e.target.checked }))}
+                onChange={(e) => onChange((prev: AccessibilitySettings) => ({ ...prev, highContrast: e.target.checked }))}
               />
             </ListItem>
             
@@ -905,7 +905,7 @@ const AccessibilityControls: React.FC<any> = ({ settings, onChange, t }) => {
               <ListItemText primary="Voice Input" />
               <Switch
                 checked={settings.voiceInput}
-                onChange={(e) => onChange(prev => ({ ...prev, voiceInput: e.target.checked }))}
+                onChange={(e) => onChange((prev: AccessibilitySettings) => ({ ...prev, voiceInput: e.target.checked }))}
               />
             </ListItem>
           </List>
