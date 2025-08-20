@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1976d2" />
+    <meta name="description" content="Smart Triage Kiosk System - AI-powered healthcare triage and patient management" />
+    
+    <!-- PWA Meta Tags -->
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Accessibility -->
+    <meta name="accessibility-features" content="high-contrast, large-text, voice-commands" />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' ws: wss:; media-src 'self';" />
+    
+    <!-- Fonts for better accessibility -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;700&display=swap" rel="stylesheet" />
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    
+    <!-- High Contrast Theme Support -->
+    <style>
+      @media (prefers-contrast: high) {
+        :root {
+          --high-contrast-bg: #000000;
+          --high-contrast-text: #ffffff;
+          --high-contrast-accent: #ffff00;
+        }
+      }
+    </style>
+    
+    <title>Smart Triage Kiosk System</title>
+  </head>
+  <body>
+    <noscript>
+      <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+        <h1>JavaScript Required</h1>
+        <p>This application requires JavaScript to run. Please enable JavaScript in your browser.</p>
+        <p>यह एप्लिकेशन चलाने के लिए JavaScript की आवश्यकता है। कृपया अपने ब्राउज़र में JavaScript को सक्षम करें।</p>
+      </div>
+    </noscript>
+    
+    <!-- Loading Screen -->
+    <div id="initial-loading" style="
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #1976d2 0%, #42a5f5 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: 'Roboto', sans-serif;
+      z-index: 9999;
+    ">
+      <div style="
+        width: 60px;
+        height: 60px;
+        border: 4px solid rgba(255,255,255,0.3);
+        border-top: 4px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 20px;
+      "></div>
+      <h1 style="margin: 0; font-size: 2rem; font-weight: 300;">Smart Triage Kiosk</h1>
+      <p style="margin: 10px 0 0 0; opacity: 0.8;">स्मार्ट ट्राइएज कियोस्क</p>
+      <style>
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      </style>
+    </div>
+    
+    <div id="root"></div>
+    
+    <script>
+      // Hide loading screen when React app loads
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const loading = document.getElementById('initial-loading');
+          if (loading) {
+            loading.style.opacity = '0';
+            loading.style.transition = 'opacity 0.5s ease-out';
+            setTimeout(() => loading.remove(), 500);
+          }
+        }, 1000);
+      });
+      
+      // Service Worker Registration
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('%PUBLIC_URL%/sw.js')
+            .then(function(registration) {
+              console.log('SW registered: ', registration);
+            })
+            .catch(function(registrationError) {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+      
+      // Offline Status Monitoring
+      window.addEventListener('online', function() {
+        document.body.setAttribute('data-connection', 'online');
+      });
+      
+      window.addEventListener('offline', function() {
+        document.body.setAttribute('data-connection', 'offline');
+      });
+      
+      // Initial connection status
+      document.body.setAttribute('data-connection', navigator.onLine ? 'online' : 'offline');
+    </script>
+  </body>
+</html>
